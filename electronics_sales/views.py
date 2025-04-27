@@ -1,7 +1,10 @@
 from rest_framework import generics
 from django_filters import rest_framework as filters
+from rest_framework.permissions import IsAuthenticated
+
 from electronics_sales.models import SalesNetwork
 from electronics_sales.serializers import SalesNetworkSerializer
+from users.permissions import IsActiveUser
 
 
 class SalesNetworkCreate(generics.CreateAPIView):
@@ -9,6 +12,7 @@ class SalesNetworkCreate(generics.CreateAPIView):
 
     queryset = SalesNetwork.objects.all()
     serializer_class = SalesNetworkSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
 
 
 class SalesNetworkUpdate(generics.UpdateAPIView):
@@ -16,6 +20,7 @@ class SalesNetworkUpdate(generics.UpdateAPIView):
 
     queryset = SalesNetwork.objects.all()
     serializer_class = SalesNetworkSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
 
 
 class SalesNetworkFilterCountry(filters.FilterSet):
@@ -35,6 +40,7 @@ class SalesNetworkList(generics.ListAPIView):
     serializer_class = SalesNetworkSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = SalesNetworkFilterCountry
+    permission_classes = [IsAuthenticated, IsActiveUser]
 
 
 class SalesNetworkRetrieve(generics.RetrieveAPIView):
@@ -42,6 +48,7 @@ class SalesNetworkRetrieve(generics.RetrieveAPIView):
 
     queryset = SalesNetwork.objects.all()
     serializer_class = SalesNetworkSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
 
 
 class SalesNetworkDestroy(generics.DestroyAPIView):
@@ -49,3 +56,4 @@ class SalesNetworkDestroy(generics.DestroyAPIView):
 
     queryset = SalesNetwork.objects.all()
     serializer_class = SalesNetworkSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
