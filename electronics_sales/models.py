@@ -48,7 +48,7 @@ class SalesNetwork(models.Model):
     contacts = models.OneToOneField(Contacts, on_delete=models.CASCADE, verbose_name='Контакты поставщика')
     products = models.ManyToManyField(Product, verbose_name='Продукты поставщика', blank=True)
     supplier = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='Поставщик продукции', blank=True, null=True, related_name='suppliers')
-    debt = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Задолженность перед поставщиком')
+    debt = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Задолженность перед поставщиком', default=0.00)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
 
     class Meta:
