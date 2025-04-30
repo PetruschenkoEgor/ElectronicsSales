@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_alter_user_options_user_name_user_phone_and_more'),
+        ("users", "0002_alter_user_options_user_name_user_phone_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='is_active',
-            field=models.BooleanField(default=True, verbose_name='Активный сотрудник'),
+            model_name="user",
+            name="is_active",
+            field=models.BooleanField(default=True, verbose_name="Активный сотрудник"),
         ),
     ]

@@ -7,7 +7,7 @@ class Command(BaseCommand):
     """Создание суперпользователя."""
 
     def handle(self, *args, **options):
-        username = 'admin'
+        username = "admin"
         email = "admin@email.com"
         if not User.objects.filter(email=email).exists() and not User.objects.filter(username=username).exists():
             user = User.objects.create(username=username, email=email)

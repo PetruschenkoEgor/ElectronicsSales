@@ -1,7 +1,7 @@
-from rest_framework.test import APITestCase
 from django.urls import reverse
+from rest_framework.test import APITestCase
 
-from electronics_sales.models import Product, SalesNetwork, Contacts
+from electronics_sales.models import Contacts, Product, SalesNetwork
 from users.models import User
 
 
@@ -10,10 +10,7 @@ class SalesNetworkCreateTest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="test",
-            email="testuser@mail.ru",
-            password="testpass",
-            is_active=True
+            username="test", email="testuser@mail.ru", password="testpass", is_active=True
         )
         self.client.force_authenticate(user=self.user)
 
@@ -25,23 +22,17 @@ class SalesNetworkCreateTest(APITestCase):
                 "country": "Россия",
                 "city": "Омск",
                 "street": "Ленина",
-                "house_number": "1"
+                "house_number": "1",
             },
-            "products": [
-                {
-                    "title": "Микроволновка",
-                    "model": "свч-1",
-                    "release_date": "2024-05-05"
-                }
-            ],
-            "debt": 100000.00
+            "products": [{"title": "Микроволновка", "model": "свч-1", "release_date": "2024-05-05"}],
+            "debt": 100000.00,
         }
 
     def test_sales_network_create(self):
         """Тест создания звена сети продажи электроники."""
 
         url = reverse("electronics_sales:sales-network-create")
-        response = self.client.post(url, data=self.form_data, format='json')
+        response = self.client.post(url, data=self.form_data, format="json")
 
         self.assertEqual(response.status_code, 201)
 
@@ -63,32 +54,18 @@ class SalesNetworkUpdateTest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="test",
-            email="testuser@mail.ru",
-            password="testpass",
-            is_active=True
+            username="test", email="testuser@mail.ru", password="testpass", is_active=True
         )
         self.client.force_authenticate(user=self.user)
 
         self.contacts = Contacts.objects.create(
-            email="test2@mail.ru",
-            country="Россия",
-            city="Омск",
-            street="Ленина",
-            house_number="1"
+            email="test2@mail.ru", country="Россия", city="Омск", street="Ленина", house_number="1"
         )
 
-        self.product = Product.objects.create(
-            title="Микроволновка",
-            model="свч-1",
-            release_date="2024-05-05"
-        )
+        self.product = Product.objects.create(title="Микроволновка", model="свч-1", release_date="2024-05-05")
 
         self.sales_network = SalesNetwork.objects.create(
-            title="Завод",
-            type_point="завод",
-            contacts=self.contacts,
-            debt=100000.00
+            title="Завод", type_point="завод", contacts=self.contacts, debt=100000.00
         )
         self.sales_network.products.add(self.product)
 
@@ -100,7 +77,7 @@ class SalesNetworkUpdateTest(APITestCase):
         """Тест редактирования звена сети продажи электроники."""
 
         url = reverse("electronics_sales:sales-network-update", kwargs={"pk": self.sales_network.pk})
-        response = self.client.patch(url, data=self.updated_data, format='json')
+        response = self.client.patch(url, data=self.updated_data, format="json")
 
         self.assertEqual(response.status_code, 200)
 
@@ -113,48 +90,27 @@ class SalesNetworkListTest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="test",
-            email="testuser@mail.ru",
-            password="testpass",
-            is_active=True
+            username="test", email="testuser@mail.ru", password="testpass", is_active=True
         )
         self.client.force_authenticate(user=self.user)
 
         self.contacts1 = Contacts.objects.create(
-            email="test1@mail.ru",
-            country="Россия",
-            city="Омск",
-            street="Ленина",
-            house_number="1"
+            email="test1@mail.ru", country="Россия", city="Омск", street="Ленина", house_number="1"
         )
 
-        self.product = Product.objects.create(
-            title="Микроволновка",
-            model="свч-1",
-            release_date="2024-05-05"
-        )
+        self.product = Product.objects.create(title="Микроволновка", model="свч-1", release_date="2024-05-05")
 
         self.sales_network1 = SalesNetwork.objects.create(
-            title="Завод",
-            type_point="завод",
-            contacts=self.contacts1,
-            debt=100000.00
+            title="Завод", type_point="завод", contacts=self.contacts1, debt=100000.00
         )
         self.sales_network1.products.add(self.product)
 
         self.contacts2 = Contacts.objects.create(
-            email="test2@mail.ru",
-            country="Россия2",
-            city="Омск2",
-            street="Ленина2",
-            house_number="2"
+            email="test2@mail.ru", country="Россия2", city="Омск2", street="Ленина2", house_number="2"
         )
 
         self.sales_network2 = SalesNetwork.objects.create(
-            title="Завод2",
-            type_point="завод",
-            contacts=self.contacts2,
-            debt=100000.00
+            title="Завод2", type_point="завод", contacts=self.contacts2, debt=100000.00
         )
         self.sales_network2.products.add(self.product)
 
@@ -175,32 +131,18 @@ class SalesNetworkRetrieveTest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="test",
-            email="testuser@mail.ru",
-            password="testpass",
-            is_active=True
+            username="test", email="testuser@mail.ru", password="testpass", is_active=True
         )
         self.client.force_authenticate(user=self.user)
 
         self.contacts = Contacts.objects.create(
-            email="test1@mail.ru",
-            country="Россия",
-            city="Омск",
-            street="Ленина",
-            house_number="1"
+            email="test1@mail.ru", country="Россия", city="Омск", street="Ленина", house_number="1"
         )
 
-        self.product = Product.objects.create(
-            title="Микроволновка",
-            model="свч-1",
-            release_date="2024-05-05"
-        )
+        self.product = Product.objects.create(title="Микроволновка", model="свч-1", release_date="2024-05-05")
 
         self.sales_network = SalesNetwork.objects.create(
-            title="Завод",
-            type_point="завод",
-            contacts=self.contacts,
-            debt=100000.00
+            title="Завод", type_point="завод", contacts=self.contacts, debt=100000.00
         )
         self.sales_network.products.add(self.product)
 
@@ -226,32 +168,18 @@ class SalesNetworkDestroyTest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="test",
-            email="testuser@mail.ru",
-            password="testpass",
-            is_active=True
+            username="test", email="testuser@mail.ru", password="testpass", is_active=True
         )
         self.client.force_authenticate(user=self.user)
 
         self.contacts = Contacts.objects.create(
-            email="test1@mail.ru",
-            country="Россия",
-            city="Омск",
-            street="Ленина",
-            house_number="1"
+            email="test1@mail.ru", country="Россия", city="Омск", street="Ленина", house_number="1"
         )
 
-        self.product = Product.objects.create(
-            title="Микроволновка",
-            model="свч-1",
-            release_date="2024-05-05"
-        )
+        self.product = Product.objects.create(title="Микроволновка", model="свч-1", release_date="2024-05-05")
 
         self.sales_network = SalesNetwork.objects.create(
-            title="Завод",
-            type_point="завод",
-            contacts=self.contacts,
-            debt=100000.00
+            title="Завод", type_point="завод", contacts=self.contacts, debt=100000.00
         )
         self.sales_network.products.add(self.product)
 

@@ -8,53 +8,90 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Contacts',
+            name="Contacts",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254, verbose_name='Почта')),
-                ('country', models.CharField(max_length=200, verbose_name='Страна')),
-                ('city', models.CharField(max_length=200, verbose_name='Город')),
-                ('street', models.CharField(max_length=250, verbose_name='Улица')),
-                ('house_number', models.CharField(max_length=100, verbose_name='Номер дома')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("email", models.EmailField(max_length=254, verbose_name="Почта")),
+                ("country", models.CharField(max_length=200, verbose_name="Страна")),
+                ("city", models.CharField(max_length=200, verbose_name="Город")),
+                ("street", models.CharField(max_length=250, verbose_name="Улица")),
+                ("house_number", models.CharField(max_length=100, verbose_name="Номер дома")),
             ],
             options={
-                'verbose_name': 'Контакт',
-                'verbose_name_plural': 'Контакты',
+                "verbose_name": "Контакт",
+                "verbose_name_plural": "Контакты",
             },
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250, verbose_name='Название продукта')),
-                ('model', models.CharField(max_length=250, verbose_name='Модель продукта')),
-                ('release_date', models.DateField(verbose_name='Дата выхода продукта')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=250, verbose_name="Название продукта")),
+                ("model", models.CharField(max_length=250, verbose_name="Модель продукта")),
+                ("release_date", models.DateField(verbose_name="Дата выхода продукта")),
             ],
             options={
-                'verbose_name': 'Продукт',
-                'verbose_name_plural': 'Продукция',
+                "verbose_name": "Продукт",
+                "verbose_name_plural": "Продукция",
             },
         ),
         migrations.CreateModel(
-            name='SalesNetwork',
+            name="SalesNetwork",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250, verbose_name='Название звена')),
-                ('type_point', models.CharField(choices=[('завод', 'Завод'), ('розничная сеть', 'Розничная сеть'), ('индивидуальный предприниматель', 'Индивидуальный предприниматель')], max_length=40, verbose_name='Тип звена')),
-                ('debt', models.DecimalField(decimal_places=2, max_digits=15, verbose_name='Задолженность перед поставщиком')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Время создания')),
-                ('contacts', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='electronics_sales.contacts', verbose_name='Контакты поставщика')),
-                ('products', models.ManyToManyField(blank=True, to='electronics_sales.product', verbose_name='Продукты поставщика')),
-                ('supplier', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='suppliers', to='electronics_sales.salesnetwork', verbose_name='Поставщик продукции')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=250, verbose_name="Название звена")),
+                (
+                    "type_point",
+                    models.CharField(
+                        choices=[
+                            ("завод", "Завод"),
+                            ("розничная сеть", "Розничная сеть"),
+                            ("индивидуальный предприниматель", "Индивидуальный предприниматель"),
+                        ],
+                        max_length=40,
+                        verbose_name="Тип звена",
+                    ),
+                ),
+                (
+                    "debt",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=15, verbose_name="Задолженность перед поставщиком"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Время создания")),
+                (
+                    "contacts",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="electronics_sales.contacts",
+                        verbose_name="Контакты поставщика",
+                    ),
+                ),
+                (
+                    "products",
+                    models.ManyToManyField(
+                        blank=True, to="electronics_sales.product", verbose_name="Продукты поставщика"
+                    ),
+                ),
+                (
+                    "supplier",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="suppliers",
+                        to="electronics_sales.salesnetwork",
+                        verbose_name="Поставщик продукции",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Звено сети',
-                'verbose_name_plural': 'Звенья сети',
+                "verbose_name": "Звено сети",
+                "verbose_name_plural": "Звенья сети",
             },
         ),
     ]

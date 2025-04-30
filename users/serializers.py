@@ -9,12 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'name', 'phone', 'password']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+        fields = ["username", "email", "name", "phone", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         # Хэшируем пароль перед сохранением
-        validated_data['password'] = make_password(validated_data['password'])
+        validated_data["password"] = make_password(validated_data["password"])
         return super().create(validated_data)

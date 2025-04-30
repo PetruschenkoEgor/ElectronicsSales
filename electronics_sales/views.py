@@ -1,9 +1,9 @@
-from rest_framework import generics
 from django_filters import rest_framework as filters
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from electronics_sales.models import SalesNetwork, Product
-from electronics_sales.serializers import SalesNetworkSerializer, ProductSerializer
+from electronics_sales.models import Product, SalesNetwork
+from electronics_sales.serializers import ProductSerializer, SalesNetworkSerializer
 from users.permissions import IsActiveUser
 
 
@@ -26,11 +26,11 @@ class SalesNetworkUpdate(generics.UpdateAPIView):
 class SalesNetworkFilterCountry(filters.FilterSet):
     """Фильтрация по стране."""
 
-    country = filters.CharFilter(field_name='contacts__country', lookup_expr='iexact')
+    country = filters.CharFilter(field_name="contacts__country", lookup_expr="iexact")
 
     class Meta:
         model = SalesNetwork
-        fields = ['country']
+        fields = ["country"]
 
 
 class SalesNetworkList(generics.ListAPIView):
