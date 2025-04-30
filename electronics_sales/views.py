@@ -2,8 +2,8 @@ from rest_framework import generics
 from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
 
-from electronics_sales.models import SalesNetwork
-from electronics_sales.serializers import SalesNetworkSerializer
+from electronics_sales.models import SalesNetwork, Product
+from electronics_sales.serializers import SalesNetworkSerializer, ProductSerializer
 from users.permissions import IsActiveUser
 
 
@@ -56,4 +56,44 @@ class SalesNetworkDestroy(generics.DestroyAPIView):
 
     queryset = SalesNetwork.objects.all()
     serializer_class = SalesNetworkSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
+
+
+class ProductCreate(generics.CreateAPIView):
+    """Создание продукта."""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
+
+
+class ProductUpdate(generics.UpdateAPIView):
+    """Редактирование продукта."""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
+
+
+class ProductList(generics.ListAPIView):
+    """Список продуктов."""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
+
+
+class ProductRetrieve(generics.RetrieveAPIView):
+    """Информация о продукте."""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsActiveUser]
+
+
+class ProductDestroy(generics.DestroyAPIView):
+    """Удаление продукта."""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated, IsActiveUser]

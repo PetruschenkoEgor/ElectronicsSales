@@ -37,7 +37,7 @@ class SalesNetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = SalesNetwork
         fields = ['id', 'title', 'type_point', 'contacts', 'products', 'supplier', 'debt', 'created_at']
-        read_only_fields = ['debt', 'created_at']
+        read_only_fields = ['created_at']
 
     def validate(self, data):
         if data.get('type_point') == 'завод' and data.get('supplier'):

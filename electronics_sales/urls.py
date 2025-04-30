@@ -2,7 +2,7 @@ from django.urls import path
 
 from electronics_sales.apps import ElectronicsSalesConfig
 from electronics_sales.views import SalesNetworkCreate, SalesNetworkUpdate, SalesNetworkList, SalesNetworkRetrieve, \
-    SalesNetworkDestroy
+    SalesNetworkDestroy, ProductCreate, ProductUpdate, ProductList, ProductRetrieve, ProductDestroy
 
 app_name = ElectronicsSalesConfig.name
 
@@ -12,4 +12,10 @@ urlpatterns = [
     path('sales-networks/', SalesNetworkList.as_view(), name='sales-networks'),
     path('<int:pk>/info-sales-network/', SalesNetworkRetrieve.as_view(), name='info-sales-network'),
     path('<int:pk>/destroy-sales-network/', SalesNetworkDestroy.as_view(), name='destroy-sales-network'),
+
+    path('product-create/', ProductCreate.as_view(), name='product-create'),
+    path('<int:pk>/product-update/', ProductUpdate.as_view(), name='product-update'),
+    path('products/', ProductList.as_view(), name='product-list'),
+    path('<int:pk>/info-product/', ProductRetrieve.as_view(), name='info-product'),
+    path('<int:pk>/destroy-product/', ProductDestroy.as_view(), name='destroy-product'),
 ]
